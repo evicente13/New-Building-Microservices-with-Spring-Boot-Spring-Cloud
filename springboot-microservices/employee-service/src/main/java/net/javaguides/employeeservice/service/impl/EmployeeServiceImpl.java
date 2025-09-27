@@ -2,6 +2,7 @@ package net.javaguides.employeeservice.service.impl;
 
 import net.javaguides.employeeservice.dto.EmployeeDTO;
 import net.javaguides.employeeservice.entity.Employee;
+import net.javaguides.employeeservice.exception.ResourceNotFoundException;
 import net.javaguides.employeeservice.mapper.EmployeeMapper;
 import net.javaguides.employeeservice.repository.EmployeeRepository;
 import net.javaguides.employeeservice.service.EmployeeService;
@@ -26,7 +27,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO getEmployeeById(Long idEmployeeDTO) {
-        Employee employee = employeeRepository.getReferenceById(idEmployeeDTO);
+        Employee employee = employeeRepository.findById(idEmployeeDTO).orElseThrow(
+                () -> new ResourceNotFoundException("Employee", "Id", idEmployeeDTO)
+        );
+
         return EmployeeMapper.MAPPER.employeeDTOToEmployeeDTO(employee);
     }
 }
