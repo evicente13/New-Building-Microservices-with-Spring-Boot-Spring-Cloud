@@ -1,5 +1,6 @@
 package net.javaguides.employeeservice.controller;
 
+import net.javaguides.employeeservice.dto.APIResponseDTO;
 import net.javaguides.employeeservice.dto.EmployeeDTO;
 import net.javaguides.employeeservice.repository.EmployeeRepository;
 import net.javaguides.employeeservice.service.EmployeeService;
@@ -22,9 +23,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id-employee}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "id-employee") Long idEmployee) {
-        EmployeeDTO employeeDTO = employeeService.getEmployeeById(idEmployee);
-        return new  ResponseEntity<>(employeeDTO, HttpStatus.OK);
+    public ResponseEntity<APIResponseDTO> getEmployeeById(@PathVariable(name = "id-employee") Long idEmployee) {
+        APIResponseDTO apiResponseDTO = employeeService.getEmployeeById(idEmployee);
+        return new  ResponseEntity<>(apiResponseDTO, HttpStatus.OK);
     }
 
 }
